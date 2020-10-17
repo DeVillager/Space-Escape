@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public CharacterController controller;
+    private CharacterController charController;
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 2f;
@@ -14,32 +14,63 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-    
-    public Vector3 _velocity;
-    private bool _isGrounded;
 
+    public Vector3 velocity;
+    private bool _isGrounded;
+    public bool isCrouching;
+    private float standHeight;
+    public float crouchHeight = 0.3f;
+    public PlayerInput input;
+    [SerializeField] private float startDropSpeed = -2f;
+
+    private void Awake()
+    {
+        input = new PlayerInput();
+        // charController = GetComponent<CharacterController>();
+        charController = GetComponentInChildren<CharacterController>();
+        standHeight = charController.height;
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+        input.Player.Crouch.started += StartCrouch;
+        input.Player.Crouch.canceled += EndCrouch;
+        input.Player.Jump.started += StartJump;
+    }
+
+    private void StartJump(InputAction.CallbackContext obj)
+    {
+        if (_isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+    }
+
+    private void StartCrouch(InputAction.CallbackContext obj)
+    {
+        Player.Instance.body.localScale = new Vector3(1, crouchHeight, 1);
+    }
+
+    private void EndCrouch(InputAction.CallbackContext obj)
+    {
+        Player.Instance.body.localScale = new Vector3(1, 1, 1);
+    }
+    
     private void Update()
     {
         _isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if (_isGrounded && _velocity.y < 0)
+        if (_isGrounded && velocity.y < 0)
         {
-            _velocity.y = -2f;
-        }
-        
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * (speed * Time.deltaTime));
-
-        if (Input.GetButtonDown("Jump") && _isGrounded)
-        {
-            _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = startDropSpeed;
         }
 
-        _velocity.y += gravity * Time.deltaTime;
-        controller.Move(_velocity * Time.deltaTime);
-        
+        Vector2 v2 = input.Player.Move.ReadValue<Vector2>();
+        Vector3 move = transform.right * v2.x + transform.forward * v2.y;
+
+        charController.Move(move * (speed * Time.deltaTime));
+
+        velocity.y += gravity * Time.deltaTime;
+        charController.Move(velocity * Time.deltaTime);
     }
 }

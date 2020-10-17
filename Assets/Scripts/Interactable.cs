@@ -13,10 +13,11 @@ public abstract class Interactable : MonoBehaviour
     public UnityEvent OnDeselect;
     public UnityEvent OnUse;
     public UnityEvent OnHold;
+    public UnityEvent OnRelease;
 
     public bool isGrabbable;
+    public bool grabbed;
 
-    
     protected virtual void Awake()
     {
         hintText = GetComponentInChildren<TextMeshProUGUI>();

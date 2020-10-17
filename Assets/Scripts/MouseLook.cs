@@ -8,17 +8,30 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity = 100f;
     public Transform playerBody;
     private float _xRotation = 0f;
-
+    private PlayerInput input;
+    // private Vector2 v2;
+    
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        input = Player.Instance.controller.input;
     }
+
+    // private void OnEnable()
+    // {
+    //     input.Player.MousePosition.performed += c => v2 = c.ReadValue<Vector2>();
+    // }
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        // var mousePosition = input.Player.MousePosition.ReadValue<Vector2>();
+        // var projectedMousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
+        Vector2 v2 = input.Player.Rotate.ReadValue<Vector2>();
+        // Debug.Log(v2.ToString());
+        // Vector2 v2 = Camera.main.ScreenToWorldPoint(mousePosition);
+        float mouseX =  v2.x * mouseSensitivity * Time.deltaTime;
+        float mouseY = v2.y * mouseSensitivity * Time.deltaTime;
 
         _xRotation -= mouseY;
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
