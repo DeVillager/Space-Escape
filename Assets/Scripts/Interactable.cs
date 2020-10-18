@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public abstract class Interactable : MonoBehaviour
 {
-    [SerializeField] protected TextMeshProUGUI hintText;
+    private TextMeshProUGUI hintText;
     // [SerializeField] private Material defaultMaterial;
     // [SerializeField] private Material highlightMaterial;
     
@@ -14,7 +14,9 @@ public abstract class Interactable : MonoBehaviour
     public UnityEvent OnUse;
     public UnityEvent OnHold;
     public UnityEvent OnRelease;
-
+    
+    public Material defaultMaterial;
+    public Material highlightMaterial;
     public bool isGrabbable;
     public bool grabbed;
 
@@ -23,12 +25,17 @@ public abstract class Interactable : MonoBehaviour
         hintText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    // private void OnEnable()
-    // {
-    //     OnSelect += ChangeMaterial(highlightMaterial);
-    // }
+    public void ChangeDefaultMaterial()
+    {
+        ChangeMaterial(defaultMaterial);
+    }
 
-    public void ChangeMaterial(Material material)
+    public void ChangeHighlightMaterial()
+    {
+        ChangeMaterial(highlightMaterial);
+    }
+
+    private void ChangeMaterial(Material material)
     {
         Renderer selectionRenderer = GetComponent<Renderer>();
         if (selectionRenderer != null)

@@ -41,6 +41,9 @@ public class Grabbable : Interactable
         transform.parent = Player.Instance.grabPoint;
         // transform.localScale = scale;
         
+        // Vector3 v = Player.Instance.body.localScale;
+        // v = new Vector3(1/v.x, 1/v.y, 1/v.z);
+        // transform.localScale = v;
         grabbed = true;
     }
 
@@ -52,6 +55,10 @@ public class Grabbable : Interactable
         // Vector3 scale = transform.localScale;
         transform.parent = null;
         // transform.localScale = scale;
+        
+        // Vector3 v = Player.Instance.body.localScale;
+        // v = new Vector3(1/v.x, 1/v.y, 1/v.z);
+        // transform.localScale = v;
         
         grabbed = false;
         // rb.AddForce(Player.Instance.controller.velocity.normalized * dropPower);

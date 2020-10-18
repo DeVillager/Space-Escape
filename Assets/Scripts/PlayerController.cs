@@ -50,11 +50,23 @@ public class PlayerController : MonoBehaviour
     private void StartCrouch(InputAction.CallbackContext obj)
     {
         Player.Instance.body.localScale = new Vector3(1, crouchHeight, 1);
+        // Grabbable g = Player.Instance.HeldItem();
+        // if (g != null)
+        // {
+        //     Vector3 v = Player.Instance.body.localScale;
+        //     v = new Vector3(1/v.x, 1/v.y, 1/v.z);
+        //     g.transform.localScale = v;
+        // }
     }
 
     private void EndCrouch(InputAction.CallbackContext obj)
     {
         Player.Instance.body.localScale = new Vector3(1, 1, 1);
+        // Grabbable g = Player.Instance.HeldItem();
+        // if (g != null)
+        // {
+        //     g.transform.localScale = Player.Instance.body.localScale;
+        // }
     }
     
     private void Update()

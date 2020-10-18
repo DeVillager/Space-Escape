@@ -14,5 +14,20 @@ public class Player: Singleton<Player>
         controller = GetComponent<PlayerController>();
         body = transform.GetChild(0);
     }
+
+    public bool IsHoldingItem()
+    {
+        return grabPoint.childCount > 0;
+    }
+
+    public Grabbable HeldItem()
+    {
+        if (IsHoldingItem())
+        {
+            return grabPoint.GetChild(0).GetComponent<Grabbable>();
+        }
+
+        return null;
+    }
     
 }
