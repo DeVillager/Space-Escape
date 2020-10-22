@@ -9,17 +9,20 @@ public class Door : MonoBehaviour
     public DoorColor color;
     public bool open = true;
     // private GameObject door;
-    
+    private Animator anim;
     private void Start()
     {
         DoorManager.Instance.AddDoor(this);
-        GetComponent<Renderer>().material = DoorManager.Instance.doorMaterials[(int) color];
+        anim = GetComponent<Animator>();
+        // TODO Change to number materials
+        // GetComponent<Renderer>().material = DoorManager.Instance.doorMaterials[(int) color];
     }
 
     public void Open()
     {
         open = true;
-        gameObject.SetActive(!open);
+        anim.SetTrigger("Open");
+        // gameObject.SetActive(!open);
     }
 
     public IEnumerator OpenForSeconds(float time)
@@ -32,7 +35,8 @@ public class Door : MonoBehaviour
     public void Close()
     {
         open = false;
-        gameObject.SetActive(!open);
+        anim.SetTrigger("Close");
+        // gameObject.SetActive(!open);
     }
 
     public void Toggle()

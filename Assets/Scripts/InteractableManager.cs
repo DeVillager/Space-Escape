@@ -29,9 +29,8 @@ public class InteractableManager : MonoBehaviour
 
     private void OnEnable()
     {
+        // input.Enable();
         input = Player.Instance.controller.input;
-        // input.Enable();
-        // input.Enable();
         input.Player.Use.started += HandleUse;
         input.Player.Use.canceled += HandleRelease;
         input.Player.Throw.started += HandleThrow;
@@ -56,7 +55,7 @@ public class InteractableManager : MonoBehaviour
 
     private void HandleUse(InputAction.CallbackContext obj)
     {
-        if (interactable != null)
+        if (interactable != null && interactable.active)
         {
             interactable.OnUse.Invoke();
         }
@@ -89,7 +88,7 @@ public class InteractableManager : MonoBehaviour
         // }
         // var ray = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
         // ReSharper disable once PossibleLossOfFraction
-        Vector2 pos = new Vector2(Screen.width / 2 , Screen.height / 2);
+        Vector2 pos = new Vector2(Screen.width / 2, Screen.height / 2);
         // Debug.Log(input.Player.MousePosition.ReadValue<Vector2>().ToString());
         // var ray = _playerCamera.ScreenPointToRay(input.Player.MousePosition.ReadValue<Vector2>());
         var ray = _playerCamera.ScreenPointToRay(pos);
@@ -99,20 +98,20 @@ public class InteractableManager : MonoBehaviour
         {
             // Debug.Log($"Hit {_hit.transform.gameObject}");
             interactable = _hit.transform.gameObject.GetComponent<Interactable>();
-            if (interactable.isGrabbable)
+            if (interactable.active)
             {
-                grabbable = interactable.GetComponent<Grabbable>();
+                if (interactable.isGrabbable)
+                {
+                    grabbable = interactable.GetComponent<Grabbable>();
+                }
+                interactable.OnSelect.Invoke();
             }
-
-            // interactable.OnSelect();
-            interactable.OnSelect.Invoke();
         }
         else
         {
             if (interactable != null)
             {
                 interactable.OnDeselect.Invoke();
-                // interactable.OnDeselect();
                 interactable = null;
             }
         }
