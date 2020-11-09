@@ -12,7 +12,6 @@ public class Player: Singleton<Player>
     {
         base.Awake();
         controller = GetComponent<PlayerController>();
-        body = transform.GetChild(0);
     }
 
     public bool IsHoldingItem()
