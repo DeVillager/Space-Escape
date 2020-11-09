@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   grabPoint: {fileID: 1374698062531264425}
-  body: {fileID: 0}
+  body: {fileID: 3261407472569240429}
 --- !u!114 &584127796888337204
 MonoBehaviour:
   m_ObjectHideFlags: 0
