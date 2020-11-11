@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
+    // TODO Fix commented issues
     //panels
     public GameObject pauseMenu;
     public GameObject dialoguePanel;
     public GameObject optionsPanel;
     public GameObject controlsPanel;
-    
+
     public GameObject shadeScreen;
     // public Slider musicSlider;
     // public Slider soundSlider;
@@ -25,7 +26,7 @@ public class MainMenuUI : MonoBehaviour
     public GameObject optionsButton;
     public GameObject firstInControls;
     private TextMeshProUGUI shadeScreenText;
-    
+
     private void Start()
     {
         EventSystem.current.SetSelectedGameObject(null);
@@ -43,7 +44,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("First Level");
     }
 
     public void Pause()
@@ -186,7 +187,7 @@ public class MainMenuUI : MonoBehaviour
         shadeScreenText.text = nextLevel;
         shadeScreen.GetComponent<Animator>().SetTrigger("ShadeOut");
     }
-    
+
     public void MusicVolumeLevel(float newMusicVolume)
     {
         // AudioSettings.Instance.MusicVolumeLevel(newMusicVolume);
@@ -196,6 +197,4 @@ public class MainMenuUI : MonoBehaviour
     {
         // AudioSettings.Instance.SFXVolumeLevel(newSFXVolume);
     }
-    
-    
 }

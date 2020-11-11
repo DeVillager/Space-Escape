@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6375556344705185369}
-  - component: {fileID: 2244851706423779181}
+  - component: {fileID: 4927363323897067898}
   - component: {fileID: 7561520135747185937}
   m_Layer: 10
   m_Name: Console
@@ -115,7 +115,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2244851706423779181
+--- !u!114 &4927363323897067898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,13 +124,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5994667257149762787}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75fe5f3fb8a2490a851dd49cda0b7c06, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eb41f96b59046c994de97f61032e645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2244851706423779181}
+      - m_Target: {fileID: 4927363323897067898}
         m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
         m_MethodName: ChangeHighlightMaterial
         m_Mode: 1
@@ -145,7 +145,7 @@ MonoBehaviour:
   OnDeselect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2244851706423779181}
+      - m_Target: {fileID: 4927363323897067898}
         m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
         m_MethodName: ChangeDefaultMaterial
         m_Mode: 1
@@ -159,7 +159,19 @@ MonoBehaviour:
         m_CallState: 2
   OnUse:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4927363323897067898}
+        m_TargetAssemblyTypeName: DoorSwitch, Assembly-CSharp
+        m_MethodName: OpenDoors
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHold:
     m_PersistentCalls:
       m_Calls: []
@@ -172,13 +184,12 @@ MonoBehaviour:
   OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  defaultMaterial: {fileID: -5264824215886326291, guid: db0b95bd83dd5db4084c58c92707fcfd, type: 3}
+  defaultMaterial: {fileID: 2100000, guid: 9c9113303d43adf49999c553a8f064b6, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 6018c1c2a3b1a8d4a8efbfc44cf7d809, type: 2}
   isGrabbable: 0
   grabbed: 0
   active: 1
   rend: {fileID: 5989934904218831587}
-  color: 0
   doors: []
 --- !u!65 &7561520135747185937
 BoxCollider:

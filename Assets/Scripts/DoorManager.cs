@@ -21,25 +21,25 @@ public class DoorManager : Singleton<DoorManager>
         levelDoors.Add(door);
     }
 
-    public void ToggleDoors(DoorColor color)
-    {
-        foreach (Door door in levelDoors)
-        {
-            if (door.color == color)
-            {
-                door.Toggle();
-            }
-        }
-    }
-
-    public void OpenDoorsForSeconds(DoorColor color, float time)
-    {
-        foreach (Door door in levelDoors)
-        {
-            if (door.color == color)
-            {
-                StartCoroutine(door.OpenForSeconds(time));
-            }
-        }
-    }
+    // public void ToggleDoors(DoorColor color)
+    // {
+    //     foreach (Door door in levelDoors)
+    //     {
+    //         if (door.color == color)
+    //         {
+    //             door.Toggle();
+    //         }
+    //     }
+    // }
+    //
+    // public void OpenDoorsForSeconds(DoorColor color, float time)
+    // {
+    //     foreach (Door door in levelDoors)
+    //     {
+    //         if (door.color == color)
+    //         {
+    //             StartCoroutine(door.OpenForSeconds(time));
+    //         }
+    //     }
+    // }
 }

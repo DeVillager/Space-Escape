@@ -5,10 +5,7 @@ using UnityEngine.Events;
 
 public abstract class Interactable : MonoBehaviour
 {
-    private TextMeshProUGUI hintText;
-    // [SerializeField] private Material defaultMaterial;
-    // [SerializeField] private Material highlightMaterial;
-
+    // private TextMeshProUGUI hintText;
     public UnityEvent OnSelect;
     public UnityEvent OnDeselect;
     public UnityEvent OnUse;
@@ -16,7 +13,7 @@ public abstract class Interactable : MonoBehaviour
     public UnityEvent OnRelease;
     public UnityEvent OnActivate;
     public UnityEvent OnDeactivate;
-
+    
     public Material defaultMaterial;
     public Material highlightMaterial;
     public bool isGrabbable;
@@ -26,7 +23,7 @@ public abstract class Interactable : MonoBehaviour
 
     protected virtual void Awake()
     {
-        hintText = GetComponentInChildren<TextMeshProUGUI>();
+        // hintText = GetComponentInChildren<TextMeshProUGUI>();
         if (rend == null) rend = GetComponent<Renderer>();
         // rend.material = defaultMaterial;
     }
@@ -44,17 +41,17 @@ public abstract class Interactable : MonoBehaviour
     private void ChangeMaterial(Material material)
     {
         rend.material = material;
-        // Renderer selectionRenderer = GetComponent<Renderer>();
-        // if (selectionRenderer != null)
-        // {
-        //     selectionRenderer.material = material;
-        // }
+        Renderer selectionRenderer = GetComponent<Renderer>();
+        if (selectionRenderer != null)
+        {
+            selectionRenderer.material = material;
+        }
     }
 
-    public void DisplayHintText(bool show)
-    {
-        hintText.enabled = show;
-    }
+    // public void DisplayHintText(bool show)
+    // {
+    //     hintText.enabled = show;
+    // }
 
     public void Activate()
     {

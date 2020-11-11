@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BigDoor
+  m_Controller: {fileID: 9100000, guid: ba694e5916d1307468d195c2b687420f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6fc9c26f62b09ce4bbf9f21ed8d7c265, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 15566b83460cb0f44a51e047ce63ba3a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f54a2b113baffe64380b38e815ebe2a9, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d1584a18df9803248affa4b2ca4193c1, type: 2}
