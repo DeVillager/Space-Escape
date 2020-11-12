@@ -26,9 +26,15 @@ public class PlayerController : MonoBehaviour
     public Vector3 velocity;
     public bool isCrouching;
     public PlayerInput input;
-
-
     private CharacterController charController;
+
+    [Header("Interactable")]
+    private Interactable _previousInteractable;
+    public Interactable interactable;
+    public Grabbable grabbable;
+    public LayerMask selectionMask;
+    public float selectionDistance = 3f;
+    public GameObject grabbedObject;
 
     // Properties for ease of access and null checks
     private float crouchingHeight => standingHeight * crouchingHeightMult;
@@ -46,7 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         SetHeight(standingHeight);
     }
-
+    
     private void Update()
     {
         if (isGrounded && velocity.y < 0)
@@ -63,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         charController.Move(velocity * Time.deltaTime);
+        UpdateInteractables();
     }
 
     private void OnEnable()
@@ -71,6 +78,8 @@ public class PlayerController : MonoBehaviour
         input.Player.Crouch.started += StartCrouch;
         input.Player.Crouch.canceled += EndCrouch;
         input.Player.Jump.started += StartJump;
+        input.Player.Use.performed += HandleUse;
+        input.Player.Throw.started += HandleThrow;
     }
 
     private void OnDisable()
@@ -79,6 +88,8 @@ public class PlayerController : MonoBehaviour
         input.Player.Crouch.started -= StartCrouch;
         input.Player.Crouch.canceled -= EndCrouch;
         input.Player.Jump.started -= StartJump;
+        input.Player.Use.performed -= HandleUse;
+        input.Player.Throw.started -= HandleThrow;
     }
 
     private void StartJump(InputAction.CallbackContext obj)
@@ -97,6 +108,28 @@ public class PlayerController : MonoBehaviour
     private void EndCrouch(InputAction.CallbackContext obj)
     {
         isCrouching = false;
+    }
+    
+    private void HandleUse(InputAction.CallbackContext obj)
+    {
+        if (interactable != null && interactable.isGrabbable && interactable.grabbed)
+        {
+            // Grabbable g = interactable.GetComponent<Grabbable>();
+            interactable.OnRelease.Invoke();
+        }
+        else if (interactable != null && interactable.active)
+        {
+            interactable.OnUse.Invoke();
+        }
+    }
+    
+
+    private void HandleThrow(InputAction.CallbackContext obj)
+    {
+        if (interactable != null && interactable.grabbed)
+        {
+            grabbable.OnThrow.Invoke();
+        }
     }
 
     public void UpdateHeight()
@@ -122,5 +155,55 @@ public class PlayerController : MonoBehaviour
         // This only scales visuals, nothing else
         body.localScale = v1;
         body.localPosition = v0;
+    }
+    
+    private void UpdateInteractables()
+    {
+        // Handling selection of interactable which player is looking at
+        Vector2 pos = new Vector2(Screen.width / 2, Screen.height / 2);
+        var ray = headCamera.ScreenPointToRay(pos);
+        RaycastHit _hit;
+        if (Physics.Raycast(ray, out _hit, selectionDistance, selectionMask))
+        {
+            interactable = _hit.transform.gameObject.GetComponent<Interactable>();
+            if (interactable.active)
+            {
+                if (interactable.isGrabbable)
+                {
+                    grabbable = interactable.GetComponent<Grabbable>();
+                }
+
+                interactable.OnSelect.Invoke();
+            }
+
+            //TODO Change handling to this if camera fast movement on interaction OnSelect becomes normal
+            // if (interactable != _previousInteractable)
+            // {
+            //     if (_previousInteractable != null)
+            //     {
+            //         _previousInteractable.OnDeselect.Invoke();
+            //         _previousInteractable = null;
+            //     }
+            //
+            //     if (interactable.active)
+            //     {
+            //         if (interactable.isGrabbable)
+            //         {
+            //             grabbable = interactable.GetComponent<Grabbable>();
+            //         }
+            //
+            //         interactable.OnSelect.Invoke();
+            //         _previousInteractable = interactable;
+            //     }
+            // }
+        }
+        else
+        {
+            if (interactable != null)
+            {
+                interactable.OnDeselect.Invoke();
+                interactable = null;
+            }
+        }
     }
 }
