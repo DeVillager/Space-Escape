@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869ee0f834f2dde4298928e194ff163a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 50
+  mouseSensitivity: 10
   playerBody: {fileID: 4018395568785912369}
 --- !u!1 &4018395568785912368
 GameObject:
@@ -164,6 +164,13 @@ MonoBehaviour:
     m_Bits: 512
   velocity: {x: 0, y: 0, z: 0}
   isCrouching: 0
+  interactable: {fileID: 0}
+  grabbable: {fileID: 0}
+  selectionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  selectionDistance: 3
+  grabbedObject: {fileID: 0}
 --- !u!114 &4015219081985011707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,13 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa49469f0b094c478df3a92698075ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 0}
-  grabbable: {fileID: 0}
-  selectionMask:
-    serializedVersion: 2
-    m_Bits: 0
-  selectionDistance: 3
-  grabbedObject: {fileID: 0}
 --- !u!1 &5028677926465528209
 GameObject:
   m_ObjectHideFlags: 0
