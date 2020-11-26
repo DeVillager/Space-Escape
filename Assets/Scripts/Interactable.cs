@@ -24,7 +24,7 @@ public abstract class Interactable : MonoBehaviour
     protected virtual void Awake()
     {
         // hintText = GetComponentInChildren<TextMeshProUGUI>();
-        if (rend == null) rend = GetComponent<Renderer>();
+        if (rend == null) rend = GetComponentInChildren<Renderer>();
         // rend.material = defaultMaterial;
     }
 
@@ -40,12 +40,8 @@ public abstract class Interactable : MonoBehaviour
 
     private void ChangeMaterial(Material material)
     {
+        Debug.Log("changed");
         rend.material = material;
-        Renderer selectionRenderer = GetComponent<Renderer>();
-        if (selectionRenderer != null)
-        {
-            selectionRenderer.material = material;
-        }
     }
 
     // public void DisplayHintText(bool show)
