@@ -57,9 +57,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 85
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -149,19 +149,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
+  crouchSpeedMult: 0.5
   jumpHeight: 2
   gravity: -20
-  standingHeight: 2
+  standingHeight: 1.85
   crouchingHeightMult: 0.5
   crouchingTime: 0.15
-  headOffset: -0.15
+  headOffset: -0.1
   startDropSpeed: -2
   headCamera: {fileID: 4018395568195894071}
   body: {fileID: 3261407472569240429}
-  groundDistance: 0.4
-  groundMask:
+  headCollisionMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   velocity: {x: 0, y: 0, z: 0}
   isCrouching: 0
   interactable: {fileID: 0}
@@ -228,10 +228,10 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.7
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.05
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5049234547229315726
@@ -303,7 +303,7 @@ Transform:
   m_GameObject: {fileID: 6766539995326509708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 1, z: 0.8}
   m_Children: []
   m_Father: {fileID: 4018395568785912369}
   m_RootOrder: 1

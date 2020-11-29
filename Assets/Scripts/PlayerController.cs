@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Options")]
     public float speed = 12f;
+    public float crouchSpeedMult = 0.5f;
     public float jumpHeight = 2f;
     public float gravity = -9.81f;
     public float standingHeight = 1.25f;
@@ -19,14 +20,12 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     public Camera headCamera;
     public Transform body;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
+    public LayerMask headCollisionMask;
 
     [Header("Other")]
     public Vector3 velocity;
     public bool isCrouching;
     public PlayerInput input;
-    private CharacterController charController;
 
     [Header("Interactable")]
     private Interactable _previousInteractable;
@@ -36,16 +35,19 @@ public class PlayerController : MonoBehaviour
     public float selectionDistance = 3f;
     public GameObject grabbedObject;
 
+    // Private variables
+    private CharacterController charController;
+    private float headCollisionThreshold = 0.02f;
+
     // Properties for ease of access and null checks
     private float crouchingHeight => standingHeight * crouchingHeightMult;
-    private bool isGrounded => charController != null && charController.isGrounded;
-    private float currentHeight => charController != null ? charController.height : standingHeight;
+    private bool isGrounded => charController.isGrounded;
+    private float currentHeight => charController.height + (charController.skinWidth * 2);
 
     private void Awake()
     {
         input = new PlayerInput();
         charController = GetComponent<CharacterController>();
-        standingHeight = charController.height;
     }
 
     private void Start()
@@ -56,16 +58,17 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (isGrounded && velocity.y < 0)
-        {
             velocity.y = startDropSpeed;
-        }
+
+        if (!isGrounded && velocity.y > 0 && CheckHeadCollision())
+            velocity.y = 0f;
 
         UpdateHeight();
 
         Vector2 v2 = input.Player.Move.ReadValue<Vector2>();
         Vector3 move = transform.right * v2.x + transform.forward * v2.y;
 
-        charController.Move(move * (speed * Time.deltaTime));
+        charController.Move(move * (speed * Time.deltaTime) * (isCrouching ? crouchSpeedMult : 1f));
 
         velocity.y += gravity * Time.deltaTime;
         charController.Move(velocity * Time.deltaTime);
@@ -141,20 +144,22 @@ public class PlayerController : MonoBehaviour
 
     private void SetHeight(float h)
     {
+        h -= charController.skinWidth * 2;
+
         // Avoid unnecessary creation of new vector3s
-        var v0 = new Vector3(0, h/2, 0);
-        var v1 = new Vector3(1, h/2, 1);
+        var bodyPosition = new Vector3(0, h/2, 0);
+        var bodyScale = new Vector3(charController.radius * 2, h/2, charController.radius * 2);
 
         // Changes height of the collider
         charController.height = h;
-        charController.center = v0;
+        charController.center = bodyPosition;
 
         // Moves camera height
-        headCamera.transform.localPosition = new Vector3(0, h - headOffset, 0); ;
+        headCamera.transform.localPosition = new Vector3(0, h + headOffset, 0); ;
 
         // This only scales visuals, nothing else
-        body.localScale = v1;
-        body.localPosition = v0;
+        body.localScale = bodyScale;
+        body.localPosition = bodyPosition;
     }
     
     private void UpdateInteractables()
@@ -175,27 +180,6 @@ public class PlayerController : MonoBehaviour
 
                 interactable.OnSelect.Invoke();
             }
-
-            //TODO Change handling to this if camera fast movement on interaction OnSelect becomes normal
-            // if (interactable != _previousInteractable)
-            // {
-            //     if (_previousInteractable != null)
-            //     {
-            //         _previousInteractable.OnDeselect.Invoke();
-            //         _previousInteractable = null;
-            //     }
-            //
-            //     if (interactable.active)
-            //     {
-            //         if (interactable.isGrabbable)
-            //         {
-            //             grabbable = interactable.GetComponent<Grabbable>();
-            //         }
-            //
-            //         interactable.OnSelect.Invoke();
-            //         _previousInteractable = interactable;
-            //     }
-            // }
         }
         else
         {
@@ -205,5 +189,13 @@ public class PlayerController : MonoBehaviour
                 interactable = null;
             }
         }
+    }
+
+    private bool CheckHeadCollision()
+    {
+        float checkRadius = charController.radius - 0.1f;
+        Vector3 checkPosition = transform.position + new Vector3(0f, currentHeight - checkRadius + headCollisionThreshold, 0f);
+
+        return Physics.CheckSphere(checkPosition, checkRadius, headCollisionMask, QueryTriggerInteraction.Ignore);
     }
 }
