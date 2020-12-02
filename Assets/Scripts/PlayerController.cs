@@ -170,14 +170,15 @@ public class PlayerController : MonoBehaviour
         RaycastHit _hit;
         if (Physics.Raycast(ray, out _hit, selectionDistance, selectionMask))
         {
-            interactable = _hit.transform.gameObject.GetComponent<Interactable>();
+            // interactable = _hit.transform.gameObject.GetComponent<Interactable>();
+            // Interactable hits collider within model object. Interactable script is in parent of model object.
+            interactable = _hit.transform.gameObject.GetComponentInParent<Interactable>();
             if (interactable.active)
             {
                 if (interactable.isGrabbable)
                 {
-                    grabbable = interactable.GetComponent<Grabbable>();
+                    grabbable = interactable.GetComponentInParent<Grabbable>();
                 }
-
                 interactable.OnSelect.Invoke();
             }
         }

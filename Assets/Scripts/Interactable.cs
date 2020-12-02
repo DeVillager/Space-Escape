@@ -13,7 +13,7 @@ public abstract class Interactable : MonoBehaviour
     public UnityEvent OnRelease;
     public UnityEvent OnActivate;
     public UnityEvent OnDeactivate;
-    
+
     public Material defaultMaterial;
     public Material highlightMaterial;
     public bool isGrabbable;
@@ -23,7 +23,6 @@ public abstract class Interactable : MonoBehaviour
 
     protected virtual void Awake()
     {
-        // hintText = GetComponentInChildren<TextMeshProUGUI>();
         if (rend == null) rend = GetComponentInChildren<Renderer>();
         // rend.material = defaultMaterial;
     }
@@ -40,7 +39,7 @@ public abstract class Interactable : MonoBehaviour
 
     private void ChangeMaterial(Material material)
     {
-        Debug.Log("changed");
+        // Debug.Log("Changed material to " + material.name);
         rend.material = material;
     }
 
@@ -51,12 +50,13 @@ public abstract class Interactable : MonoBehaviour
 
     public void Activate()
     {
+        Debug.Log(gameObject + " activated");
         active = true;
     }
 
     public void Deactivate()
     {
+        Debug.Log(gameObject + " deactivated");
         active = false;
     }
-    
 }

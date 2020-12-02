@@ -20,9 +20,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4927363323897067898, guid: e9eb1500b84e9d644b56e18cae39ab01, type: 3}
+      propertyPath: rend
+      value: 
+      objectReference: {fileID: 8979032324578818076}
     - target: {fileID: 5994667257149762787, guid: e9eb1500b84e9d644b56e18cae39ab01, type: 3}
       propertyPath: m_Name
-      value: ControlPanel2
+      value: ControlPanel3
       objectReference: {fileID: 0}
     - target: {fileID: 6375556344705185369, guid: e9eb1500b84e9d644b56e18cae39ab01, type: 3}
       propertyPath: m_LocalPosition.x
@@ -130,10 +134,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: control_panel 03
       objectReference: {fileID: 0}
+    - target: {fileID: 2399171927257733400, guid: c5684addc360e3347b4d0dde1dab0cdb, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5684addc360e3347b4d0dde1dab0cdb, type: 3}
 --- !u!1 &7603077921888504544 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2399171927257733400, guid: c5684addc360e3347b4d0dde1dab0cdb, type: 3}
+  m_PrefabInstance: {fileID: 5244473919314777080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8979032324578818076 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5452747070986523676, guid: c5684addc360e3347b4d0dde1dab0cdb, type: 3}
   m_PrefabInstance: {fileID: 5244473919314777080}
   m_PrefabAsset: {fileID: 0}
