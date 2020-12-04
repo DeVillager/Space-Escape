@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +12,8 @@ public class UIManager : Singleton<UIManager>
     // public GameObject pauseMenu;
     public Animator anim;
     private PlayerInput input;
+    // public TextMeshProUGUI dialogText;
+    // public TextMeshProUGUI dialogName;
 
     protected override void Awake()
     {
@@ -45,7 +48,7 @@ public class UIManager : Singleton<UIManager>
     // TODO Make pause open up PauseMenu, that has Restart etc. instead
     private void HandlePause(InputAction.CallbackContext obj)
     {
-        Restart();
+        // Restart();
     }
     
     private void Restart()

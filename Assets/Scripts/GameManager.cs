@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     void Start()
     {
-        SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+        if (UIManager.Instance == null)
+        {
+            SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+        }
     }
 }
