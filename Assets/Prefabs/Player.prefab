@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 10
   playerBody: {fileID: 4018395568785912369}
+  cursorLocked: 1
 --- !u!1 &4018395568785912368
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +169,7 @@ MonoBehaviour:
   grabbable: {fileID: 0}
   selectionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   selectionDistance: 3
   grabbedObject: {fileID: 0}
 --- !u!114 &4015219081985011707

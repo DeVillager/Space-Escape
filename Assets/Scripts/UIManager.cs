@@ -41,6 +41,7 @@ public class UIManager : Singleton<UIManager>
     // For debugging
     private void Quit(InputAction.CallbackContext obj)
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Debug.Log("Quitting game");
         Application.Quit();
     }
