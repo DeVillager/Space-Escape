@@ -152,10 +152,10 @@ MonoBehaviour:
   crouchSpeedMult: 0.5
   jumpHeight: 2
   gravity: -20
-  standingHeight: 1.85
+  standingHeight: 1.75
   crouchingHeightMult: 0.5
   crouchingTime: 0.15
-  headOffset: -0.1
+  headOffset: -0.05
   startDropSpeed: -2
   headCamera: {fileID: 4018395568195894071}
   body: {fileID: 3261407472569240429}
