@@ -7,6 +7,8 @@ public class Player: Singleton<Player>
     public PlayerController controller;
     public Transform grabPoint;
     public Transform body;
+    public Quaternion CameraRotation => controller.headCamera.transform.rotation;
+    public Vector3 CameraPosition => controller.headCamera.transform.position;
 
     protected override void Awake()
     {
