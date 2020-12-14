@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
+        if (UIManager.Instance.gamePaused) { return; }
         if (isGrounded && velocity.y < 0)
             velocity.y = startDropSpeed;
 
