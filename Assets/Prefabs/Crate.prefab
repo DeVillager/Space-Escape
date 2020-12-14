@@ -129,12 +129,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1561120006529274028}
-        m_TargetAssemblyTypeName: Box, Assembly-CSharp
-        m_MethodName: ChangeMaterial
-        m_Mode: 2
+        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
+        m_MethodName: ChangeHighlightMaterial
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 6018c1c2a3b1a8d4a8efbfc44cf7d809, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -144,12 +144,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1561120006529274028}
-        m_TargetAssemblyTypeName: Box, Assembly-CSharp
-        m_MethodName: ChangeMaterial
-        m_Mode: 2
+        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
+        m_MethodName: ChangeDefaultMaterial
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 9c9113303d43adf49999c553a8f064b6, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -200,6 +200,7 @@ MonoBehaviour:
   grabbed: 0
   active: 1
   rend: {fileID: 1561120006529274033}
+  selected: 0
   OnThrow:
     m_PersistentCalls:
       m_Calls:
@@ -216,5 +217,4 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   rb: {fileID: 0}
-  dropPower: 100
   throwSpeed: 500

@@ -1339,6 +1339,7 @@ MonoBehaviour:
   grabbed: 0
   active: 1
   rend: {fileID: 0}
+  selected: 0
 --- !u!4 &692547031
 Transform:
   m_ObjectHideFlags: 0
@@ -1563,74 +1564,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnHold.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnHold.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnHold.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1860143259}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnHold.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnHold.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeDefaultMaterial
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeHighlightMaterial
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeDefaultMaterial
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnHold.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Interactable, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Interactable, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Interactable, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnHold.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-      propertyPath: OnDeselect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1561120006529274035, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
       propertyPath: m_Name
       value: Crate
@@ -3374,17 +3307,6 @@ Transform:
   m_Father: {fileID: 1073411546}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1860143259 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1561120006529274028, guid: 5b100ddf48374434d8a65bb4f8bdd5b2, type: 3}
-  m_PrefabInstance: {fileID: 733506559}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 198cbd8afc324be2aed998bafbec685c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1878915951
 PrefabInstance:
   m_ObjectHideFlags: 0
