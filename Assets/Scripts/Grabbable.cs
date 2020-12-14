@@ -44,11 +44,13 @@ public class Grabbable : Interactable
     public void AttachToPlayer()
     {
         grabbed = true;
+        Player.Instance.controller.grabbedObject = this;
     }
 
     public void DetachFromPlayer()
     {
         grabbed = false;
+        Player.Instance.controller.grabbedObject = null;
     }
 
     public void Throw()

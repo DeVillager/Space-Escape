@@ -33,11 +33,11 @@ public class PlayerController : MonoBehaviour
     public Grabbable grabbable;
     public LayerMask selectionMask;
     public float selectionDistance = 3f;
-    public GameObject grabbedObject;
 
     // Private variables
     private CharacterController charController;
     private float headCollisionThreshold = 0.02f;
+    public Grabbable grabbedObject;
 
     // Properties for ease of access and null checks
     private float crouchingHeight => standingHeight * crouchingHeightMult;
@@ -175,11 +175,11 @@ public class PlayerController : MonoBehaviour
             interactable = _hit.transform.gameObject.GetComponentInParent<Interactable>();
             if (interactable.active)
             {
+                interactable.OnSelect.Invoke();
                 if (interactable.isGrabbable)
                 {
                     grabbable = interactable.GetComponentInParent<Grabbable>();
                 }
-                interactable.OnSelect.Invoke();
             }
         }
         else

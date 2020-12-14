@@ -20,6 +20,7 @@ public abstract class Interactable : MonoBehaviour
     public bool grabbed;
     public bool active = true;
     public Renderer rend;
+    public bool selected;
 
     protected virtual void Awake()
     {
@@ -29,17 +30,22 @@ public abstract class Interactable : MonoBehaviour
 
     public void ChangeDefaultMaterial()
     {
-        ChangeMaterial(defaultMaterial);
+        if (rend.material != defaultMaterial)
+        {
+            ChangeMaterial(defaultMaterial);
+        }
     }
 
     public void ChangeHighlightMaterial()
     {
-        ChangeMaterial(highlightMaterial);
+        if (rend.material != highlightMaterial)
+        {
+            ChangeMaterial(!grabbed ? highlightMaterial : defaultMaterial);
+        }
     }
 
     private void ChangeMaterial(Material material)
     {
-        // Debug.Log("Changed material to " + material.name);
         rend.material = material;
     }
 
