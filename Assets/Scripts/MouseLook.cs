@@ -10,13 +10,18 @@ public class MouseLook : MonoBehaviour
     private float _xRotation = 0f;
 
     private PlayerInput input;
-    // private Vector2 v2;
+
+    [SerializeField] private float rotateTime = 0.5f;
+    [SerializeField] private float time = 0f;
+    private Vector2 v1;
+    // private Quaternion q;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
         input = Player.Instance.controller.input;
+        // q = transform.localRotation;
     }
 
     void Update()
@@ -24,19 +29,30 @@ public class MouseLook : MonoBehaviour
         //TODO Make rotation to smooth lerp
         // var mousePosition = input.Player.MousePosition.ReadValue<Vector2>();
         // var projectedMousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
-        if (!UIManager.Instance.gamePaused)
+        if (UIManager.Instance != null && !UIManager.Instance.gamePaused)
         {
             Vector2 v2 = input.Player.Rotate.ReadValue<Vector2>();
-            // Debug.Log(v2.ToString());
-            // Vector2 v2 = Camera.main.ScreenToWorldPoint(mousePosition);
+
             float mouseX = v2.x * mouseSensitivity * Time.fixedDeltaTime;
             float mouseY = v2.y * mouseSensitivity * Time.fixedDeltaTime;
 
             _xRotation -= mouseY;
             _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
-
+            
             transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
+
+            // testing lerping rotation, dosent work :(
+            // if (Mathf.Abs(Quaternion.Dot(transform.localRotation, q)) < 0.999999f)
+            // {
+            //     time += Time.deltaTime;
+            //     transform.localRotation = Quaternion.Lerp(transform.localRotation, q, time / rotateTime);
+            // }
+            // else
+            // {
+            //     q = Quaternion.Euler(_xRotation, 0f, 0f);
+            //     time = 0;
+            // }
         }
     }
 }

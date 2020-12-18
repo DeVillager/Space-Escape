@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using InteractableTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        if (UIManager.Instance.gamePaused) { return; }
+        if (UIManager.Instance == null || UIManager.Instance.gamePaused) { return; }
         if (isGrounded && velocity.y < 0)
             velocity.y = startDropSpeed;
 
@@ -116,12 +117,12 @@ public class PlayerController : MonoBehaviour
     
     private void HandleUse(InputAction.CallbackContext obj)
     {
-        if (interactable != null && interactable.isGrabbable && interactable.grabbed)
+        if (interactable != null && interactable.isGrabbable && interactable.ItemState == State.grabbed)
         {
             // Grabbable g = interactable.GetComponent<Grabbable>();
             interactable.OnRelease.Invoke();
         }
-        else if (interactable != null && interactable.active)
+        else if (interactable != null && interactable.ItemState == State.active)
         {
             interactable.OnUse.Invoke();
         }
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleThrow(InputAction.CallbackContext obj)
     {
-        if (interactable != null && interactable.grabbed)
+        if (interactable != null && interactable.ItemState == State.grabbed)
         {
             grabbable.OnThrow.Invoke();
         }
@@ -170,11 +171,11 @@ public class PlayerController : MonoBehaviour
         var ray = headCamera.ScreenPointToRay(pos);
         RaycastHit _hit;
         if (Physics.Raycast(ray, out _hit, selectionDistance, selectionMask))
-        {
+        { 
             // interactable = _hit.transform.gameObject.GetComponent<Interactable>();
             // Interactable hits collider within model object. Interactable script is in parent of model object.
             interactable = _hit.transform.gameObject.GetComponentInParent<Interactable>();
-            if (interactable.active)
+            if (interactable.ItemState == State.active)
             {
                 interactable.OnSelect.Invoke();
                 if (interactable.isGrabbable)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using InteractableTypes;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class Grabbable : Interactable
@@ -22,7 +23,7 @@ public class Grabbable : Interactable
 
     private void FixedUpdate()
     {
-        if (grabbed)
+        if (ItemState == State.grabbed)
         {
             float distance = Vector3.Distance(Player.Instance.grabPoint.position, transform.position);
 
@@ -43,13 +44,13 @@ public class Grabbable : Interactable
 
     public void AttachToPlayer()
     {
-        grabbed = true;
+        ItemState = State.grabbed;
         Player.Instance.controller.grabbedObject = this;
     }
 
     public void DetachFromPlayer()
     {
-        grabbed = false;
+        ItemState = State.active;
         Player.Instance.controller.grabbedObject = null;
     }
 

@@ -11,7 +11,20 @@ public enum DoorColor
     Red = 1,
     Blue = 2,
 }
-    
+
+namespace InteractableTypes
+{
+    public enum State
+    {
+        inactive = 0,
+        active = 1,
+        selected = 2,
+        activated = 3,
+        grabbed = 4,
+    }
+}
+
+
 // public enum MoveState
 // {
 //     Idle,

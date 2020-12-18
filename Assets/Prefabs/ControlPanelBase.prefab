@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6375556344705185369}
   - component: {fileID: 4927363323897067898}
   m_Layer: 10
-  m_Name: Console
+  m_Name: ControlPanelBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,8 +102,9 @@ MonoBehaviour:
       m_Calls: []
   defaultMaterial: {fileID: 2100000, guid: 9c9113303d43adf49999c553a8f064b6, type: 2}
   highlightMaterial: {fileID: 2100000, guid: 6018c1c2a3b1a8d4a8efbfc44cf7d809, type: 2}
+  disabledMaterial: {fileID: 0}
+  activatedMaterial: {fileID: 0}
   isGrabbable: 0
-  grabbed: 0
-  active: 1
   rend: {fileID: 0}
+  state: 1
   doors: []

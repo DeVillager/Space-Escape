@@ -3,7 +3,22 @@ guid: 54196f84256642c4ba0a27001efab46b
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: control_panel_base
+    second: {fileID: -5561908113622634563, guid: a69fb4843cb795546b3d2a690d5e9049, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dark_screen
+    second: {fileID: 2415359908916489961, guid: a69fb4843cb795546b3d2a690d5e9049, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_electricbox
+    second: {fileID: -4701830963199915241, guid: c5684addc360e3347b4d0dde1dab0cdb, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
