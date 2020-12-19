@@ -13,6 +13,7 @@ public abstract class Interactable : MonoBehaviour
     public UnityEvent OnUse;
     public UnityEvent OnHold;
     public UnityEvent OnRelease;
+    public UnityEvent OnActivation;
     public UnityEvent OnActivate;
     public UnityEvent OnDeactivate;
 
@@ -22,25 +23,25 @@ public abstract class Interactable : MonoBehaviour
     public Material activatedMaterial;
 
     public bool isGrabbable;
+    public bool isTogglable;
     public Renderer rend;
 
-    private State _itemState = State.active;
+    [SerializeField] private State itemState = State.active;
 
     public State ItemState
     {
-        get => _itemState;
+        get => itemState;
         set
         {
-            if (_itemState == value) return;
-            _itemState = value;
-            OnStateChange?.Invoke(_itemState);
+            if (itemState == value) return;
+            itemState = value;
+            OnStateChange?.Invoke(itemState);
         }
     }
 
     public delegate void OnVariableChangeDelegate(State newState);
 
     public event OnVariableChangeDelegate OnStateChange;
-
 
     private void StateChangeHandler(State newState)
     {
@@ -53,13 +54,13 @@ public abstract class Interactable : MonoBehaviour
                 ChangeDisabledMaterial();
                 break;
             case State.selected:
-                ChangeHighlightMaterial();
+                OnSelect.Invoke();
                 break;
             case State.grabbed:
-                ChangeDefaultMaterial();
+                OnHold.Invoke();
                 break;
             case State.activated:
-                ChangeActivatedMaterial();
+                OnActivation.Invoke();
                 break;
         }
     }
@@ -68,33 +69,30 @@ public abstract class Interactable : MonoBehaviour
     {
         OnStateChange += StateChangeHandler;
         if (rend == null) rend = GetComponentInChildren<Renderer>();
-        if (ItemState == State.active)
-        {
-            ChangeDefaultMaterial();
-        }
-        else
-        {
-            ChangeDisabledMaterial();
-        }
+        StateChangeHandler(ItemState);
     }
 
+    // todo: make functions for listeners which call all other delegates functions
     private void OnEnable()
     {
         OnSelect.AddListener(ChangeHighlightMaterial);
         OnDeselect.AddListener(ChangeDefaultMaterial);
-        OnUse.AddListener(ChangeActivatedMaterial);
-        OnUse.AddListener(ChangeActivatedMaterial);
-        OnActivate.AddListener(ChangeDefaultMaterial);
-        OnDeactivate.AddListener(ChangeDisabledMaterial);
+        OnHold.AddListener(ChangeDefaultMaterial);
+        OnUse.AddListener(Use);
+        OnActivation.AddListener(ActivateItem);
+        OnActivate.AddListener(Activate);
+        OnDeactivate.AddListener(Deactivate);
     }
 
     private void OnDisable()
     {
         OnSelect.RemoveListener(ChangeHighlightMaterial);
         OnDeselect.RemoveListener(ChangeDefaultMaterial);
-        OnUse.RemoveListener(ChangeActivatedMaterial);
-        OnActivate.RemoveListener(ChangeDefaultMaterial);
-        OnDeactivate.RemoveListener(ChangeDisabledMaterial);
+        OnHold.AddListener(ChangeDefaultMaterial);
+        OnUse.RemoveListener(Use);
+        OnActivation.AddListener(ActivateItem);
+        OnActivate.RemoveListener(Activate);
+        OnDeactivate.RemoveListener(Deactivate);
     }
 
     public void ChangeDefaultMaterial()
@@ -115,9 +113,7 @@ public abstract class Interactable : MonoBehaviour
 
     public void ChangeActivatedMaterial()
     {
-        Debug.Log("jgkjlk");
-        rend.material = activatedMaterial;
-        // ChangeMaterial(activatedMaterial);
+        ChangeMaterial(activatedMaterial);
     }
 
     private void ChangeMaterial(Material material)
@@ -130,13 +126,13 @@ public abstract class Interactable : MonoBehaviour
 
     private void Use()
     {
-        if (ItemState == State.active)
+        if (ItemState == State.selected)
         {
             ItemState = State.activated;
         }
-        else if (ItemState == State.activated)
+        else if (isTogglable && ItemState == State.activated)
         {
-            ItemState = State.active;
+            ItemState = State.selected;
         }
     }
 
@@ -152,5 +148,10 @@ public abstract class Interactable : MonoBehaviour
         Debug.Log(gameObject + " deactivated");
         ItemState = State.inactive;
         ChangeDisabledMaterial();
+    }
+
+    private void ActivateItem()
+    {
+        ChangeActivatedMaterial();
     }
 }

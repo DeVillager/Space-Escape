@@ -40,6 +40,14 @@ PrefabInstance:
       propertyPath: highlightMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 7a7f6e65df7801b47882bde627783ec3, type: 2}
+    - target: {fileID: 4927363323897067898, guid: e9eb1500b84e9d644b56e18cae39ab01, type: 3}
+      propertyPath: OnSelect.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927363323897067898, guid: e9eb1500b84e9d644b56e18cae39ab01, type: 3}
+      propertyPath: OnDeselect.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5994667257149762787, guid: e9eb1500b84e9d644b56e18cae39ab01, type: 3}
       propertyPath: m_Name
       value: ControlPanel1
