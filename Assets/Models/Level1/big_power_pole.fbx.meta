@@ -3,7 +3,17 @@ guid: ccb5f44639af64142830551d25c57cbd
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: center_controltower
+    second: {fileID: 2100000, guid: 52834db55c75f6142b0438d9a7b35f1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tubes and wires
+    second: {fileID: 2100000, guid: a44c2c5b1a696e94c99cba7c9a59e3fb, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

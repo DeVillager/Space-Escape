@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: control_panel_base
-    second: {fileID: -5561908113622634563, guid: a69fb4843cb795546b3d2a690d5e9049, type: 3}
+    second: {fileID: 2100000, guid: 53dae8422f0d06647a7bc0a4e18ae17d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
