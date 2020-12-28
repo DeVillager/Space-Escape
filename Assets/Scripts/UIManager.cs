@@ -11,6 +11,8 @@ public class UIManager : Singleton<UIManager>
 {
     public GameObject levelLoadScreen;
     public GameObject pauseMenu;
+    public GameObject optionsMenu;
+    public GameObject helpPage;
     public Animator anim;
     private PlayerInput input;
     public bool gamePaused;
@@ -23,13 +25,10 @@ public class UIManager : Singleton<UIManager>
     {
         base.Awake();
         levelLoadScreen.SetActive(true);
-        // ShadeOut();
     }
 
     private void OnEnable()
     {
-        // DontDestroyOnLoad(gameObject);
-        // SceneManager.sceneLoaded += OnSceneLoaded;
         input = Player.Instance.controller.input;
         input.Player.Pause.performed += HandlePause;
     }
@@ -42,25 +41,18 @@ public class UIManager : Singleton<UIManager>
 
     private void HandlePause(InputAction.CallbackContext obj)
     {
-        if (!gamePaused)
-        {
-            Paused();
-        }
+        if (gamePaused)
+            Continue();
         else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            pauseMenu.SetActive(false);
-        }
-        gamePaused = !gamePaused;
+            Pause();
     }
     
-    public void Paused()
+    public void Pause()
     {
         gamePaused = true;
         Cursor.lockState = CursorLockMode.None;
         pauseMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(firstInPauseMenu);
-        //todo: Do not use timescale = 0 or 1
         Time.timeScale = 0;
     }
     
@@ -71,11 +63,44 @@ public class UIManager : Singleton<UIManager>
         pauseMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1;
+
+        // Hide all menus on continue
+        optionsMenu.SetActive(false);
+        helpPage.SetActive(false);
     }
     
     public void Options()
     {
-        Debug.Log("Options");
+        if (optionsMenu.activeSelf)
+        {
+            Debug.Log("Closing Options");
+            optionsMenu.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Opening Options");
+            optionsMenu.SetActive(true);
+
+            // Disable others
+            helpPage.SetActive(false);
+        }
+    }
+
+    public void HelpPage()
+    {
+        if (helpPage.activeSelf)
+        {
+            Debug.Log("Closing Help");
+            helpPage.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Opening Help");
+            helpPage.SetActive(true);
+
+            // Disable others
+            optionsMenu.SetActive(false);
+        }
     }
     
     public void MainMenu()

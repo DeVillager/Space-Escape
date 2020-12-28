@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Options")] public float speed = 12f;
+    [Header("Options")] 
+    public float speed = 12f;
     public float crouchSpeedMult = 0.5f;
     public float jumpHeight = 2f;
     public float gravity = -9.81f;
@@ -17,15 +18,18 @@ public class PlayerController : MonoBehaviour
     public float headOffset = -0.15f;
     public float startDropSpeed = -2f;
 
-    [Header("References")] public Camera headCamera;
+    [Header("References")] 
+    public Camera headCamera;
     public Transform body;
     public LayerMask headCollisionMask;
 
-    [Header("Other")] public Vector3 velocity;
+    [Header("Other")] 
+    public Vector3 velocity;
     public bool isCrouching;
     public PlayerInput input;
 
-    [Header("Interactable")] private Interactable _previousInteractable;
+    [Header("Interactable")] 
+    private Interactable _previousInteractable;
     public Interactable interactable;
     public Grabbable grabbable;
     public LayerMask selectionMask;
@@ -50,6 +54,15 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         SetHeight(standingHeight);
+
+        if (PlayerPrefs.HasKey("Option_Fov"))
+        {
+            headCamera.fieldOfView = PlayerPrefs.GetFloat("Option_Fov");
+        }
+        else
+        {
+            headCamera.fieldOfView = 80f;
+        }
     }
 
     private void Update()
@@ -84,6 +97,7 @@ public class PlayerController : MonoBehaviour
         input.Player.Crouch.canceled += EndCrouch;
         input.Player.Jump.started += StartJump;
         input.Player.Use.performed += HandleUse;
+        input.Player.Grab.performed += HandleGrab;
         input.Player.Throw.started += HandleThrow;
     }
 
@@ -94,6 +108,7 @@ public class PlayerController : MonoBehaviour
         input.Player.Crouch.canceled -= EndCrouch;
         input.Player.Jump.started -= StartJump;
         input.Player.Use.performed -= HandleUse;
+        input.Player.Grab.performed -= HandleGrab;
         input.Player.Throw.started -= HandleThrow;
     }
 
@@ -117,14 +132,26 @@ public class PlayerController : MonoBehaviour
 
     private void HandleUse(InputAction.CallbackContext obj)
     {
-        if (interactable != null && interactable.isGrabbable && interactable.ItemState == State.grabbed)
-        {
-            // Grabbable g = interactable.GetComponent<Grabbable>();
-            interactable.OnRelease.Invoke();
-        }
-        else if (interactable != null && (interactable.ItemState == State.selected || interactable.ItemState == State.activated))
+        if (interactable != null 
+            && (interactable.ItemState == State.selected || interactable.ItemState == State.activated)
+            && !interactable.isGrabbable)
         {
             interactable.OnUse.Invoke();
+        }
+    }
+
+    private void HandleGrab(InputAction.CallbackContext obj)
+    {
+        if (grabbable != null 
+            && (grabbable.ItemState == State.selected || grabbable.ItemState == State.activated))
+        {
+            grabbable.OnUse.Invoke();
+        }
+        else if (grabbable != null 
+            && grabbable.isGrabbable 
+            && grabbable.ItemState == State.grabbed)
+        {
+            grabbable.OnRelease.Invoke();
         }
     }
 
