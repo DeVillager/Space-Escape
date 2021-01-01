@@ -97,8 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869ee0f834f2dde4298928e194ff163a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 10
+  mouseSensitivity: 1
   playerBody: {fileID: 4018395568785912369}
+  rotateTime: 0.5
+  time: 0
 --- !u!1 &4018395568785912368
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,9 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a20067268d2fdb4b982c8d87e62b7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 4
   crouchSpeedMult: 0.5
-  jumpHeight: 2
+  jumpHeight: 1
   gravity: -20
   standingHeight: 1.75
   crouchingHeightMult: 0.5
@@ -162,6 +164,7 @@ MonoBehaviour:
   headCollisionMask:
     serializedVersion: 2
     m_Bits: 0
+  mouseLook: {fileID: 4018395568195894065}
   velocity: {x: 0, y: 0, z: 0}
   isCrouching: 0
   interactable: {fileID: 0}
@@ -169,7 +172,7 @@ MonoBehaviour:
   selectionMask:
     serializedVersion: 2
     m_Bits: 1024
-  selectionDistance: 2
+  selectionDistance: 3
   grabbedObject: {fileID: 0}
 --- !u!114 &4015219081985011707
 MonoBehaviour:

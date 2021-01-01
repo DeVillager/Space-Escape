@@ -5648,14 +5648,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4018395568195894065, guid: 1509c20757e7cba4ab1c9490a0be9ca1, type: 3}
-      propertyPath: rotateTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4018395568195894065, guid: 1509c20757e7cba4ab1c9490a0be9ca1, type: 3}
-      propertyPath: mouseSensitivity
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4018395568785912368, guid: 1509c20757e7cba4ab1c9490a0be9ca1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5695,14 +5687,6 @@ PrefabInstance:
     - target: {fileID: 4018395568785912369, guid: 1509c20757e7cba4ab1c9490a0be9ca1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 150.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4018395568785912371, guid: 1509c20757e7cba4ab1c9490a0be9ca1, type: 3}
-      propertyPath: speed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4018395568785912371, guid: 1509c20757e7cba4ab1c9490a0be9ca1, type: 3}
-      propertyPath: selectionDistance
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1509c20757e7cba4ab1c9490a0be9ca1, type: 3}

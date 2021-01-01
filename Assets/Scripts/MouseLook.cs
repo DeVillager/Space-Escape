@@ -8,6 +8,7 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity = 10f;
     public Transform playerBody;
     private float _xRotation = 0f;
+    private float hiddenScalar = 4f;
 
     private PlayerInput input;
 
@@ -33,8 +34,8 @@ public class MouseLook : MonoBehaviour
         {
             Vector2 v2 = input.Player.Rotate.ReadValue<Vector2>();
 
-            float mouseX = v2.x * mouseSensitivity * Time.fixedDeltaTime;
-            float mouseY = v2.y * mouseSensitivity * Time.fixedDeltaTime;
+            float mouseX = v2.x * mouseSensitivity * Time.fixedDeltaTime * hiddenScalar;
+            float mouseY = v2.y * mouseSensitivity * Time.fixedDeltaTime * hiddenScalar;
 
             _xRotation -= mouseY;
             _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);

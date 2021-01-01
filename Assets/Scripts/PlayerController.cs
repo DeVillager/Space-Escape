@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public Camera headCamera;
     public Transform body;
     public LayerMask headCollisionMask;
+    public MouseLook mouseLook;
 
     [Header("Other")] 
     public Vector3 velocity;
