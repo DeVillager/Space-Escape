@@ -12,7 +12,8 @@ public class Grabbable : Interactable
 
     private float minSpeed = 0f;
     private float maxSpeed = 600f;
-    private float maxDistance = 3f;
+    private float maxSpeedDistance = 3f;
+    private float dropDistance = 5f;
     private float rotationSpeed = 6f;
 
     protected override void Awake()
@@ -27,7 +28,7 @@ public class Grabbable : Interactable
         {
             float distance = Vector3.Distance(Player.Instance.grabPoint.position, transform.position);
 
-            float currentSpeed = Mathf.SmoothStep(minSpeed, maxSpeed, distance / maxDistance);
+            float currentSpeed = Mathf.SmoothStep(minSpeed, maxSpeed, distance / maxSpeedDistance);
             currentSpeed *= Time.fixedDeltaTime;
 
             Vector3 direction = Player.Instance.grabPoint.position - transform.position;
@@ -37,7 +38,7 @@ public class Grabbable : Interactable
             lookRot = Quaternion.Slerp(transform.rotation, lookRot, rotationSpeed * Time.fixedDeltaTime);
             rb.MoveRotation(lookRot);
 
-            if (distance > maxDistance)
+            if (distance > dropDistance)
                 DetachFromPlayer();
         }
     }

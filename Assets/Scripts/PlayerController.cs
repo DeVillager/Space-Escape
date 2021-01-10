@@ -186,7 +186,6 @@ public class PlayerController : MonoBehaviour
 
         // Moves camera height
         headCamera.transform.localPosition = new Vector3(0, h + headOffset, 0);
-        ;
 
         // This only scales visuals, nothing else
         body.localScale = bodyScale;
@@ -195,6 +194,9 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateInteractables()
     {
+        if (grabbedObject != null)
+            return;
+
         // Handling selection of interactable which player is looking at
         Vector2 pos = new Vector2(Screen.width / 2, Screen.height / 2);
         var ray = headCamera.ScreenPointToRay(pos);
