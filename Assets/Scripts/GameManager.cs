@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    //Change to proper LightManager etc
     public GameObject[] levelLights;
 
     // [Serializable]

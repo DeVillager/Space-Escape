@@ -248,7 +248,7 @@ MonoBehaviour:
   selectionMask:
     serializedVersion: 2
     m_Bits: 1024
-  selectionDistance: 3
+  selectionDistance: 1.5
   grabbedObject: {fileID: 0}
 --- !u!114 &4015219081985011707
 MonoBehaviour:

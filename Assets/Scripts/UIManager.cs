@@ -11,20 +11,27 @@ public class UIManager : Singleton<UIManager>
 {
     public GameObject levelLoadScreen;
     public GameObject pauseMenu;
+    
     public GameObject optionsMenu;
     public GameObject helpPage;
-    public Animator anim;
+    public GameObject creditsPage;
+    public GameObject confirmQuit;
+    
     private PlayerInput input;
     public bool gamePaused;
 
     [SerializeField] private GameObject firstInPauseMenu;
     // public TextMeshProUGUI dialogText;
     // public TextMeshProUGUI dialogName;
+    public Animator anim;
+
+    private List<GameObject> pages;
 
     protected override void Awake()
     {
         base.Awake();
         levelLoadScreen.SetActive(true);
+        pages = new List<GameObject> {optionsMenu, helpPage, creditsPage, confirmQuit};
     }
 
     private void OnEnable()
@@ -50,7 +57,9 @@ public class UIManager : Singleton<UIManager>
     public void Pause()
     {
         gamePaused = true;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;  
+        Cursor.visible = true;
         pauseMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(firstInPauseMenu);
         Time.timeScale = 0;
@@ -60,48 +69,52 @@ public class UIManager : Singleton<UIManager>
     {
         gamePaused = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         pauseMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1;
 
         // Hide all menus on continue
-        optionsMenu.SetActive(false);
-        helpPage.SetActive(false);
+        foreach (GameObject p in pages)
+        {
+            p.SetActive(false);
+        }
+    }
+
+    public void OpenPage(GameObject page)
+    {
+        if (page.activeSelf)
+        {
+            Debug.Log("Closing " + page.name);
+            page.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Opening " + page.name);
+            // Disable all, then enable page
+            foreach (GameObject p in pages)
+            {
+                p.SetActive(false);
+            }
+            page.SetActive(true);
+        }    
     }
     
     public void Options()
     {
-        if (optionsMenu.activeSelf)
-        {
-            Debug.Log("Closing Options");
-            optionsMenu.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("Opening Options");
-            optionsMenu.SetActive(true);
-
-            // Disable others
-            helpPage.SetActive(false);
-        }
+        OpenPage(optionsMenu);
     }
 
     public void HelpPage()
     {
-        if (helpPage.activeSelf)
-        {
-            Debug.Log("Closing Help");
-            helpPage.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("Opening Help");
-            helpPage.SetActive(true);
-
-            // Disable others
-            optionsMenu.SetActive(false);
-        }
+        OpenPage(helpPage);
     }
+    
+    public void CreditsPage()
+    {
+        OpenPage(creditsPage);
+    }
+    
     
     public void MainMenu()
     {
@@ -109,29 +122,34 @@ public class UIManager : Singleton<UIManager>
         SceneManager.LoadScene("MainMenu");
     }
     
+    public void ConfirmQuit()
+    {
+        OpenPage(confirmQuit);
+    }
+
     public void Quit()
     {
         Debug.Log("Quitting game");
         Application.Quit();
     }
-    
-    
+
+
     private void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    // {
-    //     // ShadeOut();
-    // }
-    //
-    // private void ShadeOut()
-    // {
-    //     // anim.SetTrigger("ShadeOut");
-    // }
-    //
-    // private void ShadeIn()
-    // {
-    // }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ShadeOut();
+    }
+    
+    private void ShadeOut()
+    {
+        anim.SetTrigger("ShadeOut");
+    }
+    
+    private void ShadeIn()
+    {
+    }
 }
