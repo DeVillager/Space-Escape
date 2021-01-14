@@ -20,9 +20,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")] 
     public Camera headCamera;
+    public Camera viewmodelCamera;
     public Transform body;
     public LayerMask headCollisionMask;
     public MouseLook mouseLook;
+    public ShootingController shootingController;
 
     [Header("Other")] 
     public Vector3 velocity;
@@ -59,10 +61,12 @@ public class PlayerController : MonoBehaviour
         if (PlayerPrefs.HasKey("Option_Fov"))
         {
             headCamera.fieldOfView = PlayerPrefs.GetFloat("Option_Fov");
+            viewmodelCamera.fieldOfView = PlayerPrefs.GetFloat("Option_Fov");
         }
         else
         {
             headCamera.fieldOfView = 80f;
+            viewmodelCamera.fieldOfView = 80f;
         }
     }
 
@@ -100,6 +104,7 @@ public class PlayerController : MonoBehaviour
         input.Player.Use.performed += HandleUse;
         input.Player.Grab.performed += HandleGrab;
         input.Player.Throw.started += HandleThrow;
+        input.Player.Shoot.performed += HandleShoot;
     }
 
     private void OnDisable()
@@ -111,6 +116,7 @@ public class PlayerController : MonoBehaviour
         input.Player.Use.performed -= HandleUse;
         input.Player.Grab.performed -= HandleGrab;
         input.Player.Throw.started -= HandleThrow;
+        input.Player.Shoot.performed -= HandleShoot;
     }
 
     private void StartJump(InputAction.CallbackContext obj)
@@ -154,6 +160,11 @@ public class PlayerController : MonoBehaviour
         {
             grabbable.OnRelease.Invoke();
         }
+    }
+
+    public void HandleShoot(InputAction.CallbackContext obj)
+    {
+        shootingController.Shoot();
     }
 
 

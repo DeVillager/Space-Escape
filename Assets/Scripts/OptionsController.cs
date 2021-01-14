@@ -104,7 +104,10 @@ public class OptionsController : MonoBehaviour
     private void SetFov(float value)
     {
         if (Player.Instance != null)
+        {
             Player.Instance.controller.headCamera.fieldOfView = value;
+            Player.Instance.controller.viewmodelCamera.fieldOfView = value;
+        }
 
         PlayerPrefs.SetFloat("Option_Fov", value);
     }
