@@ -1022,14 +1022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Credits:
-
-
-    Kirage
-
-    Kassu
-
-    Dasky'
+  m_text: "Tommi M\xE4kel\xE4inen\nKasimir Haapala\nNiko Matikainen"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c1adddecb5fc91a42af9991dcb4c5f14, type: 2}
   m_sharedMaterial: {fileID: -6377802241688040549, guid: c1adddecb5fc91a42af9991dcb4c5f14, type: 2}
@@ -1680,7 +1673,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355873328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 3e01c03c1adf3ec4880f6b86cbb92d75, type: 2}
   m_CullingMode: 0
@@ -1991,7 +1984,7 @@ MonoBehaviour:
     Interact:
     E
 
-    Move: W/A/S/D
+    Move: WASD
 
     Jump: Space
 
@@ -2337,7 +2330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2648755044978293872, guid: 5a3791e84e7687c498d15e1ee5f411b7, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4261412863
+      value: 16777215
       objectReference: {fileID: 0}
     - target: {fileID: 2648755044978293873, guid: 5a3791e84e7687c498d15e1ee5f411b7, type: 3}
       propertyPath: m_Pivot.x

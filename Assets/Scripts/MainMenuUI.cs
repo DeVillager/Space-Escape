@@ -1,200 +1,104 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class MainMenuUI : MonoBehaviour
+public class MainMenuUI : Singleton<MainMenuUI>
 {
-    // TODO Fix commented issues
-    //panels
-    public GameObject pauseMenu;
-    public GameObject dialoguePanel;
-    public GameObject optionsPanel;
-    public GameObject controlsPanel;
+    public GameObject levelLoadScreen;
+    
+    public GameObject optionsMenu;
+    public GameObject helpPage;
+    public GameObject creditsPage;
+    public GameObject confirmQuit;
+    
+    private PlayerInput input;
 
-    public GameObject shadeScreen;
-    // public Slider musicSlider;
-    // public Slider soundSlider;
-
-    //UI elements
-    public GameObject firstInPauseMenu;
-    public GameObject firstInMainMenu;
-    public Button dialogueButton;
-    public GameObject firstInOptions;
-    public GameObject optionsButton;
-    public GameObject firstInControls;
-    private TextMeshProUGUI shadeScreenText;
-
-    private void Start()
+    [SerializeField] private GameObject firstInPauseMenu;
+    public Animator anim;
+    public List<GameObject> pages;
+    
+    public void StartGame()
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(firstInMainMenu);
-        // shadeScreenText = shadeScreen.GetComponentInChildren<TextMeshProUGUI>();
-        // dialogueButton.onClick.AddListener(DialogueManager.Instance.DisplayNextSentence);
-        SetSliderValues();
+        // levelLoadScreen.SetActive(true);
+        SceneManager.LoadScene("GameTommi");
     }
 
-    private void SetSliderValues()
+    protected override void Awake()
     {
-        // musicSlider.value = AudioSettings.Instance.MusicVolume;
-        // soundSlider.value = AudioSettings.Instance.SFXVolume;
+        base.Awake();
+        pages.Add(optionsMenu);
+        pages.Add(helpPage);
+        pages.Add(creditsPage);
+        pages.Add(confirmQuit);
     }
 
-    public void NewGame()
+    public void OpenPage(GameObject page)
     {
-        SceneManager.LoadScene("First Level");
-    }
-
-    public void Pause()
-    {
-        if (dialoguePanel.activeInHierarchy)
+        if (page.activeSelf)
         {
-            return;
+            Debug.Log("Closing " + page.name);
+            page.SetActive(false);
         }
-
-        //If game isnt paused
-        // if (!GameManager.Instance.gamePaused)
-        // {
-        //     PauseGame();
-        // }
-        //If game was paused, return to game or move to previous panel
         else
         {
-            if (pauseMenu.activeInHierarchy)
+            Debug.Log("Opening " + page.name);
+            // Disable all, then enable page
+            foreach (GameObject p in pages)
             {
-                Resume();
+                p.SetActive(false);
             }
-            else if (optionsPanel.activeInHierarchy)
-            {
-                GoToPauseMenu();
-            }
-            else if (controlsPanel.activeInHierarchy)
-            {
-                GoToOptions();
-            }
-        }
+            page.SetActive(true);
+        }    
+    }
+    
+    public void Options()
+    {
+        OpenPage(optionsMenu);
     }
 
-    private void PauseGame()
+    public void HelpPage()
     {
-        // GameManager.Instance.gamePaused = true;
-        Time.timeScale = 0;
-        pauseMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(firstInPauseMenu);
+        OpenPage(helpPage);
+    }
+    
+    public void CreditsPage()
+    {
+        OpenPage(creditsPage);
     }
 
-    public void Resume()
+    public void ConfirmQuit()
     {
-        // GameManager.Instance.gamePaused = false;
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
-    }
-
-    public void ShowDialogue()
-    {
-        Time.timeScale = 0;
-        dialoguePanel.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(dialogueButton.gameObject);
-    }
-
-    public void HideDialogue()
-    {
-        dialoguePanel.SetActive(false);
-        Time.timeScale = 1;
-    }
-
-    public void Restart()
-    {
-        Time.timeScale = 1;
-        // GameManager.Instance.Restart();
+        OpenPage(confirmQuit);
     }
 
     public void Quit()
     {
-        Debug.Log("Quitting game...");
+        Debug.Log("Quitting game");
         Application.Quit();
     }
 
-    public void Save()
+    private void Restart()
     {
-        // SaveManager.Instance.Save();
-        Resume();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void Load()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Time.timeScale = 1;
-        // GameManager.Instance.loadData = true;
-        // GameManager.Instance.Restart();
+        ShadeOut();
     }
-
-    public IEnumerator LoadDelayed(float time)
+    
+    public void ShadeOut()
     {
-        yield return new WaitForSeconds(time);
-        Load();
+        anim.SetTrigger("ShadeOut");
     }
-
-    public IEnumerator LoadSceneDelayed(string level, float time)
-    {
-        yield return new WaitForSeconds(time);
-        SceneManager.LoadScene(level);
-    }
-
-    private void GoToOptions()
-    {
-        optionsPanel.SetActive(true);
-        pauseMenu.SetActive(false);
-        controlsPanel.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(firstInOptions);
-    }
-
-    private void GoToPauseMenu()
-    {
-        optionsPanel.SetActive(false);
-        pauseMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(optionsButton);
-    }
-
-    public void GoToMainMenu()
-    {
-        // GameManager.Instance.gamePaused = false;
-        Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void GoToControls()
-    {
-        optionsPanel.SetActive(false);
-        controlsPanel.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(firstInControls);
-    }
-
-    public void MusicOnOff()
-    {
-    }
-
+    
     public void ShadeIn()
     {
-        // shadeScreen.GetComponentInChildren<TextMeshProUGUI>().text = "";
-        shadeScreen.GetComponent<Animator>().SetTrigger("ShadeIn");
-    }
-
-    public void ShadeOut(string nextLevel)
-    {
-        shadeScreenText.text = nextLevel;
-        shadeScreen.GetComponent<Animator>().SetTrigger("ShadeOut");
-    }
-
-    public void MusicVolumeLevel(float newMusicVolume)
-    {
-        // AudioSettings.Instance.MusicVolumeLevel(newMusicVolume);
-    }
-
-    public void SFXVolumeLevel(float newSFXVolume)
-    {
-        // AudioSettings.Instance.SFXVolumeLevel(newSFXVolume);
+        anim.SetTrigger("ShadeIn");
     }
 }

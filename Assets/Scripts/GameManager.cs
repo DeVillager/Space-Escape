@@ -40,4 +40,14 @@ public class GameManager : Singleton<GameManager>
             light.SetActive(lightOn);
         }
     }
+
+    public void ShadeOut()
+    {
+        UIManager.Instance.ShadeOut();
+    }
+    
+    public void ShadeIn()
+    {
+        UIManager.Instance.ShadeIn();
+    }
 }

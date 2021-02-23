@@ -4,9 +4,20 @@ using System.Collections.Generic;
 using InteractableTypes;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class DoorSwitch : Interactable
 {
     public List<Door> doors;
+    
+    public AudioSource audiosource;
+    public AudioClip clip;
+    public AudioClip declineCLip;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        audiosource = GetComponent<AudioSource>();
+    }
 
     public void ToggleDoor(Door door)
     {
@@ -15,6 +26,7 @@ public class DoorSwitch : Interactable
 
     public void OpenDoors()
     {
+        audiosource.PlayOneShot(clip);
         foreach (Door door in doors)
         {
             door.Toggle();
@@ -23,6 +35,7 @@ public class DoorSwitch : Interactable
     
     public void OpenDoorsPermanently()
     {
+        audiosource.PlayOneShot(clip);
         foreach (Door door in doors)
         {
             door.Open();
@@ -31,6 +44,7 @@ public class DoorSwitch : Interactable
 
     public void OpenDoorsForSeconds(float time)
     {
+        audiosource.PlayOneShot(clip);
         foreach (Door door in doors)
         {
             StartCoroutine(door.OpenForSeconds(time));
@@ -41,6 +55,7 @@ public class DoorSwitch : Interactable
     public IEnumerator ActivatedForSeconds(float time)
     {
         yield return new WaitForSeconds(time);
+        audiosource.PlayOneShot(declineCLip);
         ItemState = State.active;
     }
 

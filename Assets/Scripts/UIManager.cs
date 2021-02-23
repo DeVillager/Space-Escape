@@ -26,11 +26,17 @@ public class UIManager : Singleton<UIManager>
     public Animator anim;
 
     private List<GameObject> pages;
-
+    
+    public void StartGame()
+    {
+        // levelLoadScreen.SetActive(true);
+        SceneManager.LoadScene("GameTommi");
+    }
+    
     protected override void Awake()
     {
         base.Awake();
-        levelLoadScreen.SetActive(true);
+        // levelLoadScreen.SetActive(true);
         pages = new List<GameObject> {optionsMenu, helpPage, creditsPage, confirmQuit};
     }
 
@@ -144,12 +150,13 @@ public class UIManager : Singleton<UIManager>
         ShadeOut();
     }
     
-    private void ShadeOut()
+    public void ShadeOut()
     {
         anim.SetTrigger("ShadeOut");
     }
     
-    private void ShadeIn()
+    public void ShadeIn()
     {
+        anim.SetTrigger("ShadeIn");
     }
 }

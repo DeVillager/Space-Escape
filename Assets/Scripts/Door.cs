@@ -8,11 +8,13 @@ public class Door : MonoBehaviour
 {
     public bool open = false;
     private Animator anim;
+    public AudioSource audioSource;
 
     private void Start()
     {
         DoorManager.Instance.AddDoor(this);
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public IEnumerator OpenForSeconds(float time)
@@ -27,6 +29,7 @@ public class Door : MonoBehaviour
         if (!open)
         {
             open = true;
+            audioSource.Play();
             anim.SetTrigger("Open");
         }
     }
@@ -36,6 +39,7 @@ public class Door : MonoBehaviour
         if (open)
         {
             open = false;
+            audioSource.Play();
             anim.SetTrigger("Close");
         }
     }

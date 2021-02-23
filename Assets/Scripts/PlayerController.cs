@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController charController;
     private float headCollisionThreshold = 0.02f;
     public Grabbable grabbedObject;
+    public AudioSource audioSource;
 
     // Properties for ease of access and null checks
     private float crouchingHeight => standingHeight * crouchingHeightMult;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         input = new PlayerInput();
         charController = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -87,7 +89,18 @@ public class PlayerController : MonoBehaviour
 
         Vector2 v2 = input.Player.Move.ReadValue<Vector2>();
         Vector3 move = transform.right * v2.x + transform.forward * v2.y;
-
+        if (move.magnitude > 0.01f && !isCrouching)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.Pause();
+        }
+        
         charController.Move(move * (speed * Time.deltaTime) * (isCrouching ? crouchSpeedMult : 1f));
 
         velocity.y += gravity * Time.deltaTime;
@@ -104,7 +117,6 @@ public class PlayerController : MonoBehaviour
         input.Player.Use.performed += HandleUse;
         input.Player.Grab.performed += HandleGrab;
         input.Player.Throw.started += HandleThrow;
-        input.Player.Shoot.performed += HandleShoot;
     }
 
     private void OnDisable()
@@ -116,7 +128,6 @@ public class PlayerController : MonoBehaviour
         input.Player.Use.performed -= HandleUse;
         input.Player.Grab.performed -= HandleGrab;
         input.Player.Throw.started -= HandleThrow;
-        input.Player.Shoot.performed -= HandleShoot;
     }
 
     private void StartJump(InputAction.CallbackContext obj)
@@ -161,12 +172,6 @@ public class PlayerController : MonoBehaviour
             grabbable.OnRelease.Invoke();
         }
     }
-
-    public void HandleShoot(InputAction.CallbackContext obj)
-    {
-        shootingController.Shoot();
-    }
-
 
     private void HandleThrow(InputAction.CallbackContext obj)
     {

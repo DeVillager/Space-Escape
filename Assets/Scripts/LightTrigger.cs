@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LightTrigger : EventTrigger
 {
+    
     public void LightsOn()
     {
         SwitchLights(true);

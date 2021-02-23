@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1561120006529274029}
   - component: {fileID: 1561120006529274032}
   - component: {fileID: 1561120006529274028}
+  - component: {fileID: 2548496101483516178}
   m_Layer: 10
   m_Name: Crate
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9c9113303d43adf49999c553a8f064b6, type: 2}
+  - {fileID: 2100000, guid: 1f04aa9a13154894b863d76de8161a8a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,19 +189,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnActivation:
+    m_PersistentCalls:
+      m_Calls: []
   OnActivate:
     m_PersistentCalls:
       m_Calls: []
   OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  defaultMaterial: {fileID: 2100000, guid: e710b4117a4f27c40a29ddee00ad6c2b, type: 2}
-  highlightMaterial: {fileID: 2100000, guid: 3d12da95610a1734883a9f7d2a72d814, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 1f04aa9a13154894b863d76de8161a8a, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 1f04aa9a13154894b863d76de8161a8a, type: 2}
+  disabledMaterial: {fileID: 2100000, guid: 1f04aa9a13154894b863d76de8161a8a, type: 2}
+  activatedMaterial: {fileID: 2100000, guid: 1f04aa9a13154894b863d76de8161a8a, type: 2}
   isGrabbable: 1
-  grabbed: 0
-  active: 1
+  isTogglable: 0
   rend: {fileID: 1561120006529274033}
-  selected: 0
+  itemState: 1
   OnThrow:
     m_PersistentCalls:
       m_Calls:
@@ -218,3 +223,102 @@ MonoBehaviour:
         m_CallState: 2
   rb: {fileID: 0}
   throwSpeed: 500
+  audioSource: {fileID: 2548496101483516178}
+  crateSounds:
+  - {fileID: 8300000, guid: 4cb00037741b35443acf294c465421ac, type: 3}
+--- !u!82 &2548496101483516178
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561120006529274035}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 9bcda49ffe1d0df4d87eca409b8f4779, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.503
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
